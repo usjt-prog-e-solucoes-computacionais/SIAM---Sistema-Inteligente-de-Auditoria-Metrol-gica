@@ -198,6 +198,7 @@ Scripts em /database
 - [Intellij Download](https://www.jetbrains.com/pt-br/idea/download/?section=windows)
 - [Commits Semânticos](https://github.com/iuricode/padroes-de-commits)
 - [Guia de uso git](https://github.com/danilocostabento/Git-Commands-just-for-personal-use)
+- [Download MySQL](https://dev.mysql.com/downloads/installer/)
 
 ---
 
