@@ -7,7 +7,7 @@
 ## Stacks
 
 ![Java](https://img.shields.io/badge/Java-v21-gray?style=for-the-badge&logo=openjdk&labelColor=red)
-![MySQL](https://img.shields.io/badge/MySQL-v8-gray?style=for-the-badge&logo=mysql&labelColor=4479A1&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-8.0.45-gray?style=for-the-badge&logo=mysql&labelColor=4479A1&logoColor=white)
 ![Javax Swing](https://img.shields.io/badge/JavaX%20Swing-v8-gray?style=for-the-badge&logo=openjdk&labelColor=red)
 ![Gemini API](https://img.shields.io/badge/Gemini%20Api-v1-gray?style=for-the-badge&logo=googlegemini&labelColor=8E75B2&logoColor=white)
 
