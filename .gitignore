@@ -37,3 +37,16 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+### Arquivos Compilados ###
+*.class
+
+### Logs ###
+*.log
+
+### Arquivos de Sistema ###
+.env
+
+*.properties
+
+*.properties
