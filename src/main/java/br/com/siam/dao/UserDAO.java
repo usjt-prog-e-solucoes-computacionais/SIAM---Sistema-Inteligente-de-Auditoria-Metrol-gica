@@ -4,7 +4,7 @@ import br.com.siam.model.User;
 import java.util.List;
 import java.util.Optional;
 
-public interface UserDao {
+public interface UserDAO {
     void insert(User user);
 
     Optional<User> findById(Integer id);
