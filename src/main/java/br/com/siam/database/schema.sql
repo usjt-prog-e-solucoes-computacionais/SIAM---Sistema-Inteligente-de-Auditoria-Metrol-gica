@@ -11,4 +11,4 @@ CREATE TABLE user (
 );
 
 INSERT INTO user (name, login, password_hash, user_type)
-VALUES ('Admin', 'admin', '123456', 'ADMIN');
+VALUES ('Admin', 'admin', '$2a$10$3VUFvUZAsghH3eUjt7yY4O7TDs4f6CsaQl0I1UDBuylazUXJvjHe.', 'ADMIN');
