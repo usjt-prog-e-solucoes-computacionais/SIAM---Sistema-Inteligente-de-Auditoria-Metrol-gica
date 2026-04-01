@@ -136,7 +136,7 @@ public class UserDAOImpl implements UserDAO {
             return statement.executeUpdate() > 0;
 
         } catch (SQLException exception) {
-            throw new RuntimeException("Erro deleting user.", exception);
+            throw new RuntimeException("Error deleting user.", exception);
         }
     }
 

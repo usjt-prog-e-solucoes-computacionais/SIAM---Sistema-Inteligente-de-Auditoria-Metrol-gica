@@ -12,3 +12,6 @@ CREATE TABLE user (
 
 INSERT INTO user (name, login, password_hash, user_type)
 VALUES ('Admin', 'admin', '$2a$10$3VUFvUZAsghH3eUjt7yY4O7TDs4f6CsaQl0I1UDBuylazUXJvjHe.', 'ADMIN');
+
+INSERT INTO user (name, login, password_hash, user_type)
+VALUES('User', 'user', '$2a$10$s0EU9tu9nnrOU82Cl8Hkn.oUH0TGy3VD3W.H9.H9KjVXBauqjv.L2', 'FISCAL');

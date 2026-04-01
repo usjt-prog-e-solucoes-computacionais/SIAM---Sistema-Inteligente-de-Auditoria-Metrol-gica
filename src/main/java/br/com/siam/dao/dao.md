@@ -1,1 +1,0 @@
-Aqui criaremos as interfaces de acesso ao banco de dados.

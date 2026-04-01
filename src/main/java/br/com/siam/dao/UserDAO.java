@@ -4,16 +4,9 @@ import br.com.siam.model.User;
 import java.util.List;
 import java.util.Optional;
 
-public interface UserDAO {
-    void insert(User user);
+// Interface de Data Access Object para o Usuário utilizando CRUD
+public interface UserDAO extends GenericDAO<User> {
 
-    Optional<User> findById(Integer id);
+    Optional<User> findByLogin(String login); // Método de procura de usuário por login
 
-    Optional<User> findByLogin(String login);
-
-    List<User> findAll();
-
-    boolean update(User user);
-
-    boolean deleteById(Integer id);
 }
