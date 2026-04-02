@@ -112,57 +112,58 @@ Principais entidades:
 ```mermaid
 erDiagram
 
-    USUARIO {
-        int id_usuario PK
-        string nome
-        string matricula
-        string senha_hash
-        string tipo_usuario "ADMIN ou FISCAL"
+    USERS {
+        int id PK
+        string name
+        string login
+        string registration
+        string password_hash
+        string user_type "ADMIN or INSPECTOR"
     }
 
-    POSTO {
-        int id_posto PK
+    GAS_STATION {
+        int id PK
         string cnpj
-        string razao_social
-        string endereco
+        string corporate_name
+        string address
     }
 
-    BOMBA {
-        int id_bomba PK
-        int id_posto FK
-        string serie
-        string modelo
+    GAS_PUMP {
+        int id PK
+        int gas_station_id FK
+        string serial_number
+        string model
     }
 
-    FISCALIZACAO {
-        int id_fiscalizacao PK
-        int id_usuario FK
-        int id_bomba FK
-        datetime data_hora
-        string tipo_irregularidade
-        decimal erro_medicao
-        string status_auditoria
+    FISCALIZATION {
+        int id PK
+        int user_id FK
+        int gas_pump_id FK
+        datetime fiscalization_date
+        string irregularity_type
+        decimal measurement_error
+        string audit_status
     }
 
-    FOTO_EVIDENCIA {
-        int id_foto PK
-        int id_fiscalizacao FK
-        string caminho_arquivo
-        string descricao
+    PHOTO_EVIDENCE {
+        int id PK
+        int fiscalization_id FK
+        string file_path
+        string description
     }
 
-    MICROTAREFA_IA {
-        int id_tarefa PK
-        int id_fiscalizacao FK
-        string descricao_acao
-        boolean concluida
+    NEXT_STEP {
+        int id PK
+        int fiscalization_id FK
+        string action_description
+        boolean concluded
     }
 
-    USUARIO ||--o{ FISCALIZACAO : "realiza"
-    POSTO ||--o{ BOMBA : "possui"
-    BOMBA ||--o{ FISCALIZACAO : "é auditada em"
-    FISCALIZACAO ||--o{ FOTO_EVIDENCIA : "possui"
-    FISCALIZACAO ||--o{ MICROTAREFA_IA : "gera"
+    USERS ||--o{ FISCALIZATION : performs
+    GAS_STATION ||--o{ GAS_PUMP : has
+    GAS_PUMP ||--o{ FISCALIZATION : is_inspected_in
+    FISCALIZATION ||--o{ PHOTO_EVIDENCE : has
+    FISCALIZATION ||--o{ NEXT_STEP : generates
 ```
 
 
