@@ -8,23 +8,23 @@ CREATE TABLE users (
     login VARCHAR(100) UNIQUE NOT NULL,
     registration VARCHAR(50) UNIQUE NOT NULL,
     password_hash VARCHAR(255) NOT NULL,
-    user_type ENUM('ADMIN', 'FISCAL') NOT NULL
+    user_type ENUM('ADMIN', 'INSPECTOR') NOT NULL
 );
 
 CREATE TABLE gas_station (
     id INT AUTO_INCREMENT PRIMARY KEY,
     cnpj VARCHAR(18) NOT NULL UNIQUE,
-    razao_social VARCHAR(150) NOT NULL,
+    corporate_name VARCHAR(150) NOT NULL,
     address VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE gas_pumo (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    id_station INT NOT NULL,
-    serie VARCHAR(100) NOT NULL,
+    gas_station_id INT NOT NULL,
+    serial_number VARCHAR(100) NOT NULL,
     model VARCHAR(100) NOT NULL,
     CONSTRAINT fk_pump_station
-        FOREIGN KEY (id_station)
+        FOREIGN KEY (gas_station_id)
         REFERENCES gas_station(id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
@@ -32,19 +32,19 @@ CREATE TABLE gas_pumo (
 
 CREATE TABLE fiscalization (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    id_user INT NOT NULL,
-    id_pump INT NOT NULL,
+    user_id INT NOT NULL,
+    gas_pump_id INT NOT NULL,
     fiscalization_date DATETIME NOT NULL,
     irregularity_type VARCHAR(100),
     measurement_error DECIMAL(10,2),
-    auditoria_status VARCHAR(50) NOT NULL,
+    audit_status VARCHAR(50) NOT NULL,
     CONSTRAINT fk_fiscalization_user
-        FOREIGN KEY (id_user)
-        REFERENCES user(id)
+        FOREIGN KEY (user_id)
+        REFERENCES users(id)
         ON DELETE RESTRICT
         ON UPDATE CASCADE,
     CONSTRAINT fk_fiscalization_pump
-        FOREIGN KEY (id_pump)
+        FOREIGN KEY (gas_pump_id)
         REFERENCES gas_pump(id)
         ON DELETE RESTRICT
         ON UPDATE CASCADE
@@ -52,11 +52,11 @@ CREATE TABLE fiscalization (
 
 CREATE TABLE next_steps (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    id_fiscalization INT NOT NULL,
-    description_act TEXT NOT NULL,
+    fiscalization_id INT NOT NULL,
+    action_description TEXT NOT NULL,
     concluded BOOLEAN NOT NULL DEFAULT FALSE,
     CONSTRAINT fk_next_steps_fiscalization
-        FOREIGN KEY (id_fiscalization)
+        FOREIGN KEY (fiscalization_id)
         REFERENCES fiscalization(id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
@@ -64,10 +64,10 @@ CREATE TABLE next_steps (
 
 CREATE TABLE photo_evidence (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    id_fiscalization INT NOT NULL,
+    fiscalization_id INT NOT NULL,
     path_archive VARCHAR(255) NOT NULL,
     CONSTRAINT fk_photo_fiscalization
-        FOREIGN KEY (id_fiscalization)
+        FOREIGN KEY (fiscalization_id)
         REFERENCES fiscalization(id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
