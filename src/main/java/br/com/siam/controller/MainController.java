@@ -1,6 +1,7 @@
 package br.com.siam.controller;
 
 import br.com.siam.model.User;
+import br.com.siam.view.MainView;
 
 public class MainController {
 
@@ -14,8 +15,8 @@ public class MainController {
     }
 
     private void configureView() {
-        mainView.displayAutheticatedUser(authenticatedUser);
-        mainView.setAdminPanel(isAdmin());
+        mainView.displayAuthenticatedUser(authenticatedUser);
+        mainView.setAdminPanelVisible(isAdmin());
     }
 
     private boolean isAdmin() {
