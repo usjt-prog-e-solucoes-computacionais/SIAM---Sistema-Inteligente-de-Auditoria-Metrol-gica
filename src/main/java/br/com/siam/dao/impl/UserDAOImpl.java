@@ -13,7 +13,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public void insert(User user) {
-        String sql = "INSERT INTO user (name, login, password_hash, user_type) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO user (name, login, registration, password_hash, user_type) VALUES (?, ?, ?, ?, ?)";
 
         try (
                 Connection connection = DatabaseConnection.getConnection();
@@ -21,8 +21,9 @@ public class UserDAOImpl implements UserDAO {
                 ) {
             statement.setString(1, user.getName());
             statement.setString(2, user.getLogin());
-            statement.setString(3, user.getPasswordHash());
-            statement.setString(4, user.getUserType());
+            statement.setString(3, user.getRegistration());
+            statement.setString(4, user.getPasswordHash());
+            statement.setString(5, user.getUserType());
 
             int affectedRows = statement.executeUpdate();
 
@@ -42,7 +43,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public Optional<User> findById(Integer id) {
-        String sql = "SELECT id, name, login, password_hash, user_type FROM user WHERE id = ?";
+        String sql = "SELECT id, name, login, registration, password_hash, user_type FROM user WHERE id = ?";
 
         try (
                 Connection connection = DatabaseConnection.getConnection();
@@ -63,14 +64,15 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public Optional<User> findByLogin(String login) {
-        String sql = "SELECT id, name, login, password_hash, login_type WHERE login = ?";
+    public Optional<User> findByEmailOrRegistration(String identifier) {
+        String sql = "SELECT id, name, login, registration, password_hash, user_type FROM user WHERE login = ? OR registration = ?";
 
         try (
                 Connection connection = DatabaseConnection.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)
                 ) {
-            statement.setString(1, login);
+            statement.setString(1, identifier);
+            statement.setString(2, identifier);
 
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
@@ -78,7 +80,7 @@ public class UserDAOImpl implements UserDAO {
                 }
             }
         } catch (SQLException exception) {
-            throw new RuntimeException("Error finding user by login.", exception);
+            throw new RuntimeException("Error finding user by email or registration.", exception);
         }
 
         return Optional.empty();
@@ -86,7 +88,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public List<User> findAll() {
-        String sql = "SELECT id, name, login, password_hash, user_type FROM user";
+        String sql = "SELECT id, name, login, registration, password_hash, user_type FROM user";
         List<User> users = new ArrayList<>();
 
         try (
@@ -105,7 +107,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public boolean update(User user) {
-        String sql = "UPDATE user SET name = ?, login = ?, password_hash = ?, user_type = ? WHERE id = ?";
+        String sql = "UPDATE user SET name = ?, login = ?, registration = ?, password_hash = ?, user_type = ? WHERE id = ?";
 
         try (
                 Connection connection = DatabaseConnection.getConnection();
@@ -113,9 +115,10 @@ public class UserDAOImpl implements UserDAO {
                 ) {
             statement.setString(1, user.getName());
             statement.setString(2, user.getLogin());
-            statement.setString(3, user.getPasswordHash());
-            statement.setString(4, user.getUserType());
-            statement.setInt(5, user.getId());
+            statement.setString(3, user.getRegistration());
+            statement.setString(4, user.getPasswordHash());
+            statement.setString(5, user.getUserType());
+            statement.setInt(6, user.getId());
 
             return statement.executeUpdate() > 0;
 
@@ -145,6 +148,7 @@ public class UserDAOImpl implements UserDAO {
         user.setId(resultSet.getInt("id"));
         user.setName(resultSet.getString("name"));
         user.setLogin(resultSet.getString("login"));
+        user.setRegistration(resultSet.getString("registration"));
         user.setPasswordHash(resultSet.getString("password_hash"));
         user.setUserType(resultSet.getString("user_type"));
         return user;

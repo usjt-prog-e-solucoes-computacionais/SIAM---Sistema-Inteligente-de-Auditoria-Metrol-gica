@@ -5,15 +5,17 @@ public class User {
     private Integer id;
     private String name;
     private String login;
+    private String registration;
     private String passwordHash;
     private String userType;
 
     public User() {}
 
-    public User(Integer id, String name, String login, String passwordHash, String userType) {
+    public User(Integer id, String name, String login, String registration, String passwordHash, String userType) {
         this.id = id;
         this.name = name;
         this.login = login;
+        this.registration = registration;
         this.passwordHash = passwordHash;
         this.userType = userType;
     }
@@ -41,6 +43,10 @@ public class User {
     public void setLogin(String login) {
         this.login = login;
     }
+
+    public String getRegistration() { return registration; }
+
+    public void setRegistration(String registration) { this.registration = registration; }
 
     public String getPasswordHash() {
         return passwordHash;
