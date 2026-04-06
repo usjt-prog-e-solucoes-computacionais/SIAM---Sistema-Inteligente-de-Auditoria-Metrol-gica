@@ -9,7 +9,7 @@ public interface UserDAO {
 
     Optional<User> findById(Integer id);
 
-    Optional<User> findByLogin(String login);
+    Optional<User> findByEmailOrRegistration(String identifier);
 
     List<User> findAll();
 
