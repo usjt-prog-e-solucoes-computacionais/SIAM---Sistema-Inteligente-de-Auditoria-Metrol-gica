@@ -71,25 +71,25 @@ O sistema segue o padrão:
 ## 📊 📋 Checklists do Projeto
 
 ### ✅ Setup Inicial
-- [ ] Criar projeto Maven
-- [ ] Configurar estrutura MVC
-- [ ] Configurar conexão com MySQL
-- [ ] Criar `.gitignore`
+- [X] Criar projeto Maven
+- [X] Configurar estrutura MVC
+- [X] Configurar conexão com MySQL
+- [X] Criar `.gitignore`
 
 ---
 
 ### 🔐 Autenticação
-- [ ] Tela de login
-- [ ] Criptografia de senha
-- [ ] Controle de sessão
-- [ ] Controle de acesso por perfil
+- [X] Tela de login
+- [X] Criptografia de senha
+- [X] Controle de sessão
+- [X] Controle de acesso por perfil
 
 ---
 
 ### 👤 Usuários
-- [ ] CRUD de usuários
-- [ ] Definir tipos (ADMIN / FISCAL)
-- [ ] Inserção de admin direto no banco
+- [X] CRUD de usuários
+- [X] Definir tipos (ADMIN / FISCAL)
+- [X] Inserção de admin direto no banco
 
 ---
 
