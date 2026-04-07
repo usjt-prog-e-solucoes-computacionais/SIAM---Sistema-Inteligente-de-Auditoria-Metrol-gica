@@ -172,16 +172,13 @@ public class LoginView extends JFrame {
             if (authenticatedUser.isPresent()) {
                 User user = authenticatedUser.get();
 
-                JOptionPane.showMessageDialog(
-                        this,
-                        "Login realizado com sucesso. Bem-vindo, " + user.getName() + ".",
-                        "Sucesso",
-                        JOptionPane.INFORMATION_MESSAGE
-                );
+                MainView mainView = new MainView(user);
+                mainView.setVisible(true);
+                dispose();
             } else {
                 JOptionPane.showMessageDialog(
                         this,
-                        "Login ou senha inválidos.",
+                        "Credenciais inválidas.",
                         "Erro de autenticação",
                         JOptionPane.ERROR_MESSAGE
                 );
