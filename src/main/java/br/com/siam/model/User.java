@@ -8,16 +8,18 @@ public class User {
     private String registration;
     private String passwordHash;
     private String userType;
+    private Boolean active;
 
     public User() {}
 
-    public User(Integer id, String name, String login, String registration, String passwordHash, String userType) {
+    public User(Integer id, String name, String login, String registration, String passwordHash, String userType, Boolean active) {
         this.id = id;
         this.name = name;
         this.login = login;
         this.registration = registration;
         this.passwordHash = passwordHash;
         this.userType = userType;
+        this.active = active;
     }
 
     public Integer getId() {
@@ -63,4 +65,8 @@ public class User {
     public void setUserType(String userType) {
         this.userType = userType;
     }
+
+    public void setActive(Boolean active) { this.active = active; }
+
+    public Boolean getActive() { return active; }
 }

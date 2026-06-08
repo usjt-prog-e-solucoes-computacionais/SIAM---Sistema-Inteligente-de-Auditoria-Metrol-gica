@@ -15,8 +15,6 @@ public class MainController {
     }
 
     private void configureView() {
-        mainView.displayAuthenticatedUser(authenticatedUser);
-        mainView.setAdminPanelVisible(isAdmin());
     }
 
     private boolean isAdmin() {
