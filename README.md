@@ -1,6 +1,6 @@
 # 🚀 SIAM — Sistema Inteligente de Auditoria Metrológica
 
-> Sistema desktop em Java com suporte a Inteligência Artificial para otimização de fiscalizações metrológicas.
+> Sistema desktop desenvolvido em Java para apoio às fiscalizações metrológicas, com foco em rastreabilidade, automação de processos e futura integração com Inteligência Artificial Generativa.
 
 ---
 
@@ -17,36 +17,58 @@
 
 O **SIAM (Sistema Inteligente de Auditoria Metrológica)** é uma aplicação desktop desenvolvida em **Java**, com interface gráfica em `javax.swing` e banco de dados **MySQL**.
 
-O sistema tem como objetivo **modernizar e automatizar o processo de fiscalização de bombas de combustível**, auxiliando fiscais com apoio de **Inteligência Artificial Generativa (RAG)**.
+O projeto nasceu com o objetivo de modernizar o processo de fiscalização de bombas de combustível realizado por órgãos reguladores, oferecendo maior controle operacional, rastreabilidade das inspeções e apoio à tomada de decisão.
+
+O sistema está sendo desenvolvido como um MVP acadêmico inspirado em necessidades reais do **IPEM-SP**, sendo projetado desde o início para suportar futuras integrações com Inteligência Artifical, modelos RAG (Retrieval-Augmented Generation), evidÊncias fotográficas e automação de auditorias.
 
 ---
 
-## 🎯 Objetivo
+## 🎯 Objetivos
 
-Desenvolver um sistema capaz de:
+O SIAM busca:
 
-- Gerenciar fiscalizações
-- Armazenar evidências fotográficas
-- Controlar usuários e permissões
-- Gerar **planos de ação automatizados com IA**
-
----
-
-## 🌍 Alinhamento com ODS
-
-Este projeto está alinhado com:
-
-- ⚖️ **ODS 16 — Paz, Justiça e Instituições Eficazes**
-- 🏗️ **ODS 9 — Indústria, Inovação e Infraestrutura**
+- Centralizar informações de fiscalizações metrológicas;
+- Controlar usuários e permissões de acesso;
+- Gerenciar postos de combustível e bombas fiscalizadas;
+- Registrar fiscalizações e irregularidades encontradas;
+- Facilitar o acompanhamento das atividades dos fiscais;
+- Preparar a base para utilização de Inteligência Artificial aplicada à fiscalização.
 
 ---
 
-## 🧠 Diferencial
+## 🌍 Objetivos de Desenvolvimento Sustentável (ODS)
 
-- 🤖 Integração com IA (Google Gemini)
-- 🧩 Arquitetura **RAG (Retrieval-Augmented Generation)**
-- 📊 Geração automática de microtarefas de auditoria
-- 📚 Base normativa técnica integrada
+Este projeto está alinhado com os seguintes objetivos da ONU:
+
+🏗️ **ODS 9 — Indústria, Inovação e Infraestrutura**
+
+Modernização dos processos de fiscalização através de soluções tecnológicas.
+
+♻️ **ODS 12 - Consumo e Produção Responsáveis**
+
+Combate a irregularidades que impactam diretamente consumidores e fornecedores.
+
+⚖️ **ODS 16 — Paz, Justiça e Instituições Eficazes**
+
+Fortalecimento da eficiência, transparência e confiabilidade das instituições fiscalizadoras.
+
+---
+
+## 🧠 Visão de Futuro
+
+O SIAM foi concebido para evoluir além do MVP acadêmico.
+
+Entreas funcionalidades planejadas estão:
+
+- Integração com Inteligência Artificial Generativa;
+- Implementação de arquitetura **RAG**;
+- Base normativa integrada com portarias do Inmetro;
+- Sugestão automática de microtarefas para fiscais;
+- Análise inteligente de irregularidades;
+- Upload e gerenciamento de evidências fotográficas;
+- Histórico completo de auditorias;
+- Dashboard analítico avançado;
+- Integração com aplicações web e mobile.
 
 ---
 
@@ -55,105 +77,310 @@ Este projeto está alinhado com:
 O sistema segue o padrão:
 **MVC (Model - View - Controller)**
 
-### 🔧 Tecnologias
+Além disso, utiliza:
+- DAO Pattern
+- Service Layer Pattern
+- JDBC
+- MySQL
+- Maven
 
-| Camada        | Tecnologia |
-|--------------|-----------|
-| Linguagem     | Java 21 |
-| Interface     | javax.swing |
-| Banco         | MySQL |
-| Persistência  | JDBC + DAO |
-| IA            | Google Gemini API |
-| Build         | Maven |
+Fluxo Principal:
+
+```mermaid
+flowchart TD
+
+    A[Usuário] --> B[Tela Swing]
+
+    B --> C[Controller]
+
+    C --> D[Service]
+
+    D --> E[DAO]
+
+    E --> F[(MySQL)]
+
+    F --> E
+
+    E --> D
+
+    D --> C
+
+    C --> B
+
+    B --> A
+```
 
 ---
 
-## 📊 📋 Checklists do Projeto
+### 🔧 Tecnologias Utilizadas
 
-### ✅ Setup Inicial
-- [X] Criar projeto Maven
-- [X] Configurar estrutura MVC
-- [X] Configurar conexão com MySQL
-- [X] Criar `.gitignore`
+| Camada            | Tecnologia        |
+|-------------------|-------------------|
+| Linguagem         | Java 21           |
+| Interface Gráfica | javax.swing       |
+| Banco de Dados    | MySQL             |
+| Persistência      | JDBC              |
+| Arquitetura       | MVC               |
+| Padrões           | DAO + Service     |
+| Build Tools       | Maven             |
+| IA (Planejado)    | Google Gemini API |
+| IA (Planejado)    | RAG               |
+
+---
+
+## 📊 Funcionalidades Implementadas
+
+### ✅ Infraestrutura
+- [X] Projeto Maven
+- [X] Estrutura MVC
+- [X] Configuração JDBC
+- [X] Integração com MySQL
+- [X] Controle de dependências
 
 ---
 
 ### 🔐 Autenticação
 - [X] Tela de login
+- [X] Login por e-mail
+- [X] Login por matrícula
 - [X] Criptografia de senha
 - [X] Controle de sessão
 - [X] Controle de acesso por perfil
 
 ---
 
-### 👤 Usuários
-- [X] CRUD de usuários
-- [X] Definir tipos (ADMIN / FISCAL)
-- [X] Inserção de admin direto no banco
+### 👤 Gestão de Usuários
+- [X] Cadastro de usuários
+- [X] Listagem de usuários
+- [X] Edição de usuários
+- [X] Desativação lógica de usuários
+- [X] Controle ADMIN / FISCAL
+- [X] Paínel administrativo
+- [X] Perfil do usuário
 
 ---
 
-### ⛽ Postos e Bombas
-- [ ] CRUD de postos
-- [ ] CRUD de bombas
-- [ ] Relacionamento entre entidades
+### ⛽ Gestão de Postos
+- [X] Cadastro de postos
+- [X] Pesquisa de postos
+- [X] Listagem de postos
+- [X] Edição de postos
+- [X] Desativação de postos
 
+
+### ⛽ Gestão de Bombas
+- [X] Cadastro de bombas
+- [X] Pesquisa de bombas
+- [X] Listagem de bombas
+- [X] Edição de bombas
+- [X] Desativação de bombas
 ---
 
-### 📋 Fiscalização
-- [ ] CRUD de fiscalizações
-- [ ] Registro de irregularidades
-- [ ] Cálculo de erro de medição
-
----
-
-### 📸 Evidências
-- [ ] Upload de imagens
-- [ ] Armazenamento local
-- [ ] Visualização
-
----
-
-### 🤖 Inteligência Artificial
-- [ ] Integração com API Gemini
-- [ ] Implementar RAG
-- [ ] Geração de microtarefas
+### 📋 Gestão de Fiscalização
+- [X] Cadastro de fiscalizações
+- [X] Listagem de fiscalizações
+- [X] Pesquisa de fiscalizações
+- [X] Visualização detalhada
+- [X] Edição de fiscalizações
+- [X] Controle de permissões
+- [X] Filtro por fiscal responsável
 
 ---
 
 ### 📊 Dashboard
-- [ ] Total de fiscalizações
-- [ ] Total de usuários
-- [ ] Tipos de irregularidades
-- [ ] Reincidência por CNPJ
+- [X] Dashboard principal
+- [X] Controle de acesso
+- [X] Listagem centralizada 
+- [X] Busca por termos 
+- [X] Filtro por usuário 
+- [X] Navegação entre módulos
 
 ---
 
-### 🧪 Testes e Finalização
-- [ ] Testes manuais
-- [ ] Ajustes de performance
-- [ ] Preparação para apresentação
+## 🚧 Funcionalidades em Desenvolvimento
 
+### 📸 Evidências Fotográficas
+- [ ] Upload de imagens
+- [ ] Armazenamento de evidências
+- [ ] Visualização de fotos
+- [ ] Vinculação com fiscalizações
+
+---
+
+### 🤖 Inteligência Artificial
+- [ ] Integração com Google Gemini
+- [ ] Arquitetura RAG
+- [ ] Consulta de portarias do Inmetro 
+- [ ] Sugestão automática de ações 
+- [ ] Geração de microtarefas 
+- [ ] Assistente inteligente para fiscais
+
+---
+
+### 📊 Analytics
+- [ ] Indicadores operacionais 
+- [ ] Gráficos estatísticos 
+- [ ] Reincidência por CNPJ 
+- [ ] Ranking de irregularidades 
+- [ ] Dashboard gerencial
+
+---
+
+## 📈 Status Atual
+
+### MVP Acadêmico
+
+Estimativa de conclusão: **70%**
+
+Módulos concluídos:
+- Autenticação
+- Usuários
+- Postos
+- Bombas
+- Fiscalizações
+- Dashboard
+- Controle de permissões
+
+Próximos marcos:
+
+1. Evidências fotográficas
+2. Dashboard analítico
+3. Inteligência Artificial
+4. Integração RAG
+5. Versão Web
+
+---
+
+## 🗄️ Modelo de Dados
+
+Principais entidades:
+
+- **Usuário**
+- **Proprietário**
+- **Fiscalização**
+
+```mermaid
+erDiagram
+
+    USER {
+        int id PK
+        string name
+        string login
+        string registration
+        string password_hash
+        enum user_type
+        boolean active
+    }
+
+    GAS_STATION {
+        int id PK
+        string cnpj
+        string corporate_name
+        string address
+        boolean active
+    }
+
+    GAS_PUMP {
+        int id PK
+        int gas_station_id FK
+        string serial_number
+        string model
+        boolean active
+    }
+
+    FISCALIZATION {
+        int id PK
+        int user_id FK
+        int gas_pump_id FK
+        datetime fiscalization_date
+        string irregularity_type
+        decimal measurement_error
+        string audit_status
+        boolean active
+        datetime archived_at
+    }
+
+    NEXT_STEPS {
+        int id PK
+        int fiscalization_id FK
+        string action_description
+        boolean concluded
+    }
+
+    PHOTO_EVIDENCE {
+        int id PK
+        int fiscalization_id FK
+        string path_archive
+    }
+
+    USER ||--o{ FISCALIZATION : realiza
+
+    GAS_STATION ||--o{ GAS_PUMP : possui
+
+    GAS_PUMP ||--o{ FISCALIZATION : fiscalizada
+
+    FISCALIZATION ||--o{ NEXT_STEPS : gera
+
+    FISCALIZATION ||--o{ PHOTO_EVIDENCE : possui
+```
 ---
 
 ## 📁 Estrutura do Projeto
 
 ```
-/src
-/main
-/java
-/model
-/view
-/controller
-/dao
-/service
-/database
-/docs
-/assets
-README.md
-INSTRUCOES.md
-PROPOSTA.md
-EDITAL.md
+src/main/java/br/com/siam 
+├── config 
+├── controller 
+├── dao 
+│ └── impl 
+├── dto 
+├── model 
+├── service 
+├── view
+```
+
+---
+
+## 📈 Fluxo de Negócio do MVP
+
+```mermaid
+flowchart TD
+
+    A[Login] --> B{Perfil}
+
+    B -->|ADMIN| C[Painel Administrativo]
+
+    B -->|FISCAL| D[Dashboard]
+
+    C --> E[Gerenciar Usuários]
+
+    D --> F[Visualizar Fiscalizações]
+
+    F --> G[Nova Fiscalização]
+
+    G --> H[Selecionar Posto]
+
+    H --> I[Selecionar Bomba]
+
+    I --> J[Registrar Irregularidade]
+
+    J --> K[Registrar Erro de Medição]
+
+    K --> L[Salvar Fiscalização]
+
+    L --> M[Exibir na Dashboard]
+
+    D --> N[Consultar Fiscalizações]
+
+    N --> O[Visualizar Detalhes]
+
+    O --> P{Permissão}
+
+    P -->|ADMIN| Q[Editar Fiscalização]
+
+    P -->|Responsável| Q
+
+    P -->|Outro Usuário| R[Apenas Leitura]
 ```
 
 ---
@@ -172,7 +399,7 @@ EDITAL.md
 
 - Java 21
 - Maven
-- MySQL
+- MySQL 8+
 
 ### ⚙️ Passos
 
@@ -184,8 +411,14 @@ mvn exec:java
 ```
 
 🔐 Banco de Dados
-MySQL
-Scripts em /database
+
+O banco utilizado é o MySQL.
+
+O script de criação das tabelas encontra-se na pasta:
+
+database/
+
+Para acesso inicial ao sistema é necessário possuir um usuário cadastrado.
 
 ⚠️ O usuário ADMIN deve ser criado diretamente no banco.
 
@@ -218,12 +451,33 @@ Universidade São Judas Tadeu — 2026/1
 
 ---
 
-## 🚧 Status do Projeto
+## 🚀 Roadmap
 
-![Static Badge](https://img.shields.io/badge/Em%20desenvolvimento-yellow?style=for-the-badge)
+**Versão 1.0 — MVP**
+- Autenticação 
+- CRUDs principais 
+- Dashboard 
+- Controle de permissões 
+
+**Versão 2.0** 
+- Evidências fotográficas 
+- Histórico de alterações 
+- Dashboard analítico 
+
+**Versão 3.0** 
+- Integração com IA 
+- Arquitetura RAG 
+- Sugestões inteligentes 
+
+**Versão 4.0** 
+- Aplicação Web 
+- API REST 
+- Aplicativo Mobile
 
 ---
 
 📜 Licença
 
-Uso acadêmico.
+Projeto desenvolvido para fins acadêmicos.
+
+Uso educacional e de pesquisa.
