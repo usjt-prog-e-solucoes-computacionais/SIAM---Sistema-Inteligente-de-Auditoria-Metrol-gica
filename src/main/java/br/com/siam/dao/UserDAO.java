@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserDAO {
-    void insert(User user);
 
     Optional<User> findById(Integer id);
 
@@ -13,7 +12,13 @@ public interface UserDAO {
 
     List<User> findAll();
 
-    boolean update(User user);
+    boolean updateProfile(
+            Integer userId,
+            String name,
+            String passwordHash
+    );
 
-    boolean deleteById(Integer id);
+    void save(User user);
+
+    void deactivate(Integer userId);
 }
