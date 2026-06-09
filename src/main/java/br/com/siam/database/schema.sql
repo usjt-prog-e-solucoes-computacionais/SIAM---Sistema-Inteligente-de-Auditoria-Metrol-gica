@@ -13,11 +13,11 @@ CREATE TABLE IF NOT EXISTS user (
     );
 
 CREATE TABLE gas_station (
-                             id INT AUTO_INCREMENT PRIMARY KEY,
-                             cnpj VARCHAR(18) NOT NULL UNIQUE,
-                             corporate_name VARCHAR(150) NOT NULL,
-                             address VARCHAR(255) NOT NULL,
-                             active BOOLEAN NOT NULL DEFAULT TRUE
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    cnpj VARCHAR(18) NOT NULL UNIQUE,
+    corporate_name VARCHAR(150) NOT NULL,
+    address VARCHAR(255) NOT NULL,
+    active BOOLEAN NOT NULL DEFAULT TRUE
 );
 
 CREATE TABLE gas_pump (
@@ -85,5 +85,3 @@ VALUES (
         '0000',
         '$2a$10$3VUFvUZAsghH3eUjt7yY4O7TDs4f6CsaQl0I1UDBuylazUXJvjHe.',
         'ADMIN');
-
--- Usuário Admin login: testeadmin@ipem.sp.gov.br ou 0000 senha: 123456
