@@ -20,4 +20,6 @@ public interface GasPumpDAO {
     boolean update(GasPump gasPump);
 
     void deactivate(Integer id);
+
+    void reactivate(Integer id);
 }
