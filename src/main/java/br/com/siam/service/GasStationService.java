@@ -87,4 +87,10 @@ public class GasStationService {
 
         gasStationDAO.deactivate(id);
     }
+
+    public void reactivate(
+            Integer id
+    ) {
+        gasStationDAO.reactivate(id);
+    }
 }

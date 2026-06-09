@@ -43,7 +43,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public Optional<User> findById(Integer id) {
-        String sql = "SELECT id, name, login, registration, password_hash, user_type, active FROM user WHERE id = ? AND active = true LIMIT 1";
+        String sql = "SELECT id, name, login, registration, password_hash, user_type, active FROM user WHERE id = ?";
 
         try (
                 Connection connection = DatabaseConnection.getConnection();
@@ -65,7 +65,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public Optional<User> findByEmailOrRegistration(String identifier) {
-        String sql = "SELECT id, name, login, registration, password_hash, user_type, active FROM user WHERE login = ? OR registration = ? AND active = true LIMIT 1";
+        String sql = "SELECT id, name, login, registration, password_hash, user_type, active FROM user WHERE login = ? OR registration = ?";
 
         try (
                 Connection connection = DatabaseConnection.getConnection();
@@ -141,6 +141,22 @@ public class UserDAOImpl implements UserDAO {
 
         } catch (SQLException exception) {
             throw new RuntimeException("Erro deleting user.", exception);
+        }
+    }
+
+    @Override
+    public void reactivate(Integer id) {
+        String sql = "UPDATE user SET active = true WHERE id = ?";
+
+        try (
+                Connection connection = DatabaseConnection.getConnection();
+                PreparedStatement statement = connection.prepareStatement(sql)
+        ) {
+            statement.setInt(1, id);
+            statement.executeUpdate();
+
+        } catch (SQLException exception) {
+            throw new RuntimeException("Erro reativating user.", exception);
         }
     }
 

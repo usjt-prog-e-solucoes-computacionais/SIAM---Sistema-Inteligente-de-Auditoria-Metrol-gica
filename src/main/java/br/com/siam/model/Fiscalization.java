@@ -19,6 +19,8 @@ public class Fiscalization {
 
     private String auditStatus;
 
+    private Boolean active;
+
     public Fiscalization() {
     }
 
@@ -77,4 +79,8 @@ public class Fiscalization {
     public void setAuditStatus(String auditStatus) {
         this.auditStatus = auditStatus;
     }
+
+    public Boolean getActive() { return active; };
+
+    public void setActive(Boolean active) { this.active = active; }
 }

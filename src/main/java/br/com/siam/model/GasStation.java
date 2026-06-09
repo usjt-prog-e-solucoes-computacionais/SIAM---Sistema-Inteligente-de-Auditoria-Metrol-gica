@@ -10,6 +10,8 @@ public class GasStation {
 
     private String address;
 
+    private Boolean active;
+
     public GasStation() {
     }
 
@@ -17,12 +19,14 @@ public class GasStation {
             Integer id,
             String cnpj,
             String corporateName,
-            String address
+            String address,
+            Boolean active
     ) {
         this.id = id;
         this.cnpj = cnpj;
         this.corporateName = corporateName;
         this.address = address;
+        this.active = active;
     }
 
     public Integer getId() {
@@ -56,6 +60,10 @@ public class GasStation {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    public Boolean getActive() {return active;}
+
+    public void setActive(Boolean active) {this.active = active;}
 
     @Override
     public String toString() {

@@ -87,6 +87,10 @@ public class UserService {
         UserDAO.deactivate(userId);
     }
 
+    public void reactivateUser(Integer userId) {
+        UserDAO.reactivate(userId);
+    }
+
     public void updateProfile(
             User autheticatedUser,
             String name,

@@ -18,4 +18,6 @@ public interface GasStationDAO {
     boolean update(GasStation gasStation);
 
     void deactivate(Integer gasStationId);
+
+    void reactivate(Integer gasStationId);
 }

@@ -11,6 +11,8 @@ public interface FiscalizationDAO {
 
     List<Fiscalization> findAll();
 
+    List<Fiscalization> findAllWithInactive();
+
     List<Fiscalization> findByUser(Integer userId);
 
     List<Fiscalization> search(String term);
@@ -20,4 +22,6 @@ public interface FiscalizationDAO {
     boolean update(Fiscalization fiscalization);
 
     void archive(Integer fiscalizationId);
+
+    void reactivate(Integer fiscalizationId);
 }

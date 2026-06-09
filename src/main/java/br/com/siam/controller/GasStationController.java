@@ -65,4 +65,10 @@ public class GasStationController {
 
         gasStationService.deactivate(id);
     }
+
+    public void reactivate(
+            Integer id
+    ) {
+        gasStationService.reactivate(id);
+    }
 }

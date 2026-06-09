@@ -40,4 +40,9 @@ public class UserController {
         userService.updateProfile(
                 authenticatedUser, name, currentPassword, newPassword, confirmPassword);
     }
+
+    public void reactivateUser(Integer userId) {
+
+        userService.reactivateUser(userId);
+    }
 }

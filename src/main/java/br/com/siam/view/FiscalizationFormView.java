@@ -13,6 +13,8 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -110,6 +112,7 @@ public class FiscalizationFormView extends JFrame {
                 "Irregularidade",
                 "Erro",
                 "Status",
+                "Ativa",
                 "Data"
         };
 
@@ -270,6 +273,48 @@ public class FiscalizationFormView extends JFrame {
         searchButton.addActionListener(
                 event -> searchFiscalizations()
         );
+
+        fiscalizationTable.addMouseListener(
+                new MouseAdapter() {
+
+                    @Override
+                    public void mouseClicked(
+                            MouseEvent event
+                    ) {
+
+                        if (event.getClickCount() == 2) {
+
+                            openFiscalizationDetails();
+                        }
+                    }
+                }
+        );
+    }
+
+    private void openFiscalizationDetails() {
+
+        int selectedRow =
+                fiscalizationTable.getSelectedRow();
+
+        if (selectedRow == -1) {
+
+            return;
+        }
+
+        Integer fiscalizationId =
+                (Integer)
+                        fiscalizationTableModel.getValueAt(
+                                selectedRow,
+                                0
+                        );
+
+        FiscalizationDetailsView detailsView =
+                new FiscalizationDetailsView(
+                        fiscalizationId,
+                        authenticatedUser
+                );
+
+        detailsView.setVisible(true);
     }
 
     private void loadGasStations() {
@@ -390,7 +435,7 @@ public class FiscalizationFormView extends JFrame {
 
         List<Fiscalization> fiscalizations =
                 fiscalizationController
-                        .getAllFiscalizations();
+                        .getAllFiscalizationsWithInactive();
 
         for (Fiscalization fiscalization
                 : fiscalizations) {
@@ -403,6 +448,9 @@ public class FiscalizationFormView extends JFrame {
                             fiscalization.getIrregularityType(),
                             fiscalization.getMeasurementError(),
                             fiscalization.getAuditStatus(),
+                            fiscalization.getActive()
+                                ? "SIM"
+                                : "NÃO",
                             fiscalization.getFiscalizationDate()
                     }
             );
@@ -431,6 +479,9 @@ public class FiscalizationFormView extends JFrame {
                             fiscalization.getIrregularityType(),
                             fiscalization.getMeasurementError(),
                             fiscalization.getAuditStatus(),
+                            fiscalization.getActive()
+                                    ? "SIM"
+                                    : "NÃO",
                             fiscalization.getFiscalizationDate()
                     }
             );
