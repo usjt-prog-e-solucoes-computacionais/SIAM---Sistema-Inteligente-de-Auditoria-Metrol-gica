@@ -1,12 +1,12 @@
-CREATE DATABASE if not exists siam_db;
+CREATE DATABASE IF NOT EXISTS siam_db;
 
 USE siam_db;
 
-CREATE TABLE if not exists user (
+CREATE TABLE IF NOT EXISTS user (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     login VARCHAR(120) UNIQUE NOT NULL,
-    registration VARCHAR(20)   NOT NULL,
+    registration VARCHAR(20) NOT NULL,
     password_hash VARCHAR(255) NOT NULL,
     user_type ENUM('ADMIN', 'FISCAL') NOT NULL,
     active BOOLEAN NOT NULL DEFAULT TRUE
