@@ -3,6 +3,7 @@ package br.com.siam.view;
 import br.com.siam.controller.FiscalizationController;
 import br.com.siam.model.Fiscalization;
 import br.com.siam.model.User;
+import br.com.siam.util.IconUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -92,6 +93,10 @@ public class FiscalizationDetailsView extends JFrame {
 
         setTitle(
                 "Detalhes da Fiscalização"
+        );
+
+        setIconImage(
+                IconUtils.getApplicationIcon()
         );
 
         setSize(

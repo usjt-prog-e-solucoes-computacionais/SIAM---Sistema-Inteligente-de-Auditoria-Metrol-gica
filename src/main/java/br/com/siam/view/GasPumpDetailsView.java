@@ -3,6 +3,7 @@ package br.com.siam.view;
 import br.com.siam.controller.GasPumpController;
 import br.com.siam.model.GasPump;
 import br.com.siam.model.User;
+import br.com.siam.util.IconUtils;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -107,6 +108,10 @@ public class GasPumpDetailsView extends JFrame {
     private void configureWindow() {
 
         setTitle("SIAM - Detalhes da Bomba");
+
+        setIconImage(
+                IconUtils.getApplicationIcon()
+        );
 
         setSize(700, 350);
 

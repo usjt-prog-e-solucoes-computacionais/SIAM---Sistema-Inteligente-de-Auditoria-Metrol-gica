@@ -5,6 +5,7 @@ import br.com.siam.model.GasPump;
 import br.com.siam.model.GasStation;
 import br.com.siam.model.User;
 import br.com.siam.service.GasStationService;
+import br.com.siam.util.IconUtils;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -102,6 +103,10 @@ public class GasPumpFormView extends JFrame {
     private void configureWindow() {
 
         setTitle("Cadastro de Bombas");
+
+        setIconImage(
+                IconUtils.getApplicationIcon()
+        );
 
         setSize(900, 600);
 

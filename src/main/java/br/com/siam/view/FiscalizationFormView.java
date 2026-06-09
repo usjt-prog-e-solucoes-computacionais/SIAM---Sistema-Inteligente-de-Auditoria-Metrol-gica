@@ -7,6 +7,7 @@ import br.com.siam.model.GasStation;
 import br.com.siam.model.User;
 import br.com.siam.service.GasPumpService;
 import br.com.siam.service.GasStationService;
+import br.com.siam.util.IconUtils;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -131,6 +132,10 @@ public class FiscalizationFormView extends JFrame {
     private void configureWindow() {
 
         setTitle("Cadastro de Fiscalizações");
+
+        setIconImage(
+                IconUtils.getApplicationIcon()
+        );
 
         setSize(1200, 700);
 

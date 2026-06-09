@@ -110,8 +110,6 @@ flowchart TD
     B --> A
 ```
 
----
-
 ### 🔧 Tecnologias Utilizadas
 
 | Camada            | Tecnologia        |

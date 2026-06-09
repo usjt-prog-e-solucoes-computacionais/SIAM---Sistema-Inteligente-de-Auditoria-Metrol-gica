@@ -3,6 +3,7 @@ package br.com.siam.view;
 import br.com.siam.controller.GasStationController;
 import br.com.siam.model.GasStation;
 import br.com.siam.model.User;
+import br.com.siam.util.IconUtils;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -105,6 +106,10 @@ public class GasStationDetailsView extends JFrame {
     private void configureWindow() {
 
         setTitle("SIAM - Detalhes do Posto");
+
+        setIconImage(
+                IconUtils.getApplicationIcon()
+        );
 
         setSize(750, 350);
 

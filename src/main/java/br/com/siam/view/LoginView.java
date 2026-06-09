@@ -2,6 +2,7 @@ package br.com.siam.view;
 
 import br.com.siam.controller.LoginController;
 import br.com.siam.model.User;
+import br.com.siam.util.IconUtils;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -35,8 +36,16 @@ public class LoginView extends JFrame {
     }
 
     private void initializeComponents() {
-        logoLabel = new JLabel("[ LOGO DO SISTEMA ]", SwingConstants.CENTER);
-        logoLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        logoLabel = new JLabel(
+                IconUtils.getScaledLogo(
+                        96,
+                        96
+                )
+        );
+
+        logoLabel.setHorizontalAlignment(
+                SwingConstants.CENTER
+        );
 
         systemTitleLabel = new JLabel("SIAM - Sistema Inteligente de Auditoria", SwingConstants.CENTER);
         systemTitleLabel.setFont(new Font("Arial", Font.BOLD, 18));
@@ -56,6 +65,11 @@ public class LoginView extends JFrame {
 
     private void configureWindow() {
         setTitle("SIAM - Sistema Inteligente de Auditoria Metrológica");
+
+        setIconImage(
+                IconUtils.getApplicationIcon()
+        );
+
         setSize(700, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);

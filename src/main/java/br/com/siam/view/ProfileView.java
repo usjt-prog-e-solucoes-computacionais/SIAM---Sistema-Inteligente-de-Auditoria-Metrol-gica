@@ -2,6 +2,7 @@ package br.com.siam.view;
 
 import br.com.siam.controller.UserController;
 import br.com.siam.model.User;
+import br.com.siam.util.IconUtils;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -116,6 +117,10 @@ public class ProfileView extends JFrame {
     private void configureWindow() {
 
         setTitle("SIAM - Meu Perfil");
+
+        setIconImage(
+                IconUtils.getApplicationIcon()
+        );
 
         setSize(700, 500);
 

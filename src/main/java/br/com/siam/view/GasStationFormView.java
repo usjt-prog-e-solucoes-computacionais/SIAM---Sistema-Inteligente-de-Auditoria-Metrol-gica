@@ -3,6 +3,7 @@ package br.com.siam.view;
 import br.com.siam.controller.GasStationController;
 import br.com.siam.model.GasStation;
 import br.com.siam.model.User;
+import br.com.siam.util.IconUtils;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -102,6 +103,10 @@ public class GasStationFormView extends JFrame {
     private void configureWindow() {
 
         setTitle("Cadastro de Postos");
+
+        setIconImage(
+                IconUtils.getApplicationIcon()
+        );
 
         setSize(900, 600);
 

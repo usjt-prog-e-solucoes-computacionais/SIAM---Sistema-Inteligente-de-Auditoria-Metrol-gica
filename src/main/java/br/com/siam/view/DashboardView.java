@@ -2,6 +2,7 @@ package br.com.siam.view;
 
 import br.com.siam.controller.DashboardController;
 import br.com.siam.dto.DashboardDTO;
+import br.com.siam.util.IconUtils;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -61,6 +62,10 @@ public class DashboardView extends JFrame {
     private void configureWindow() {
 
         setTitle("Dashboard SIAM");
+
+        setIconImage(
+                IconUtils.getApplicationIcon()
+        );
 
         setSize(900, 500);
 
