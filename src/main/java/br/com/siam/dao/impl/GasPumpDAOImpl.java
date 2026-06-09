@@ -227,11 +227,18 @@ public class GasPumpDAOImpl implements GasPumpDAO {
     public Optional<GasPump> findById(Integer id) {
 
         String sql = """
-        SELECT *
-        FROM gas_pump
-        WHERE id = ?
-        AND active = true
-        """;
+            SELECT
+                gp.id,
+                gp.serial_number,
+                gp.model,
+                gs.id AS station_id,
+                gs.corporate_name
+            FROM gas_pump gp
+            INNER JOIN gas_station gs
+                ON gs.id = gp.gas_station_id
+            WHERE gp.id = ?
+            AND gp.active = true
+            """;
 
         try (
                 Connection connection =
@@ -250,22 +257,9 @@ public class GasPumpDAOImpl implements GasPumpDAO {
 
                 if (resultSet.next()) {
 
-                    GasPump gasPump =
-                            new GasPump();
-
-                    gasPump.setId(
-                            resultSet.getInt("id")
+                    return Optional.of(
+                            mapResult(resultSet)
                     );
-
-                    gasPump.setSerialNumber(
-                            resultSet.getString("serial_number")
-                    );
-
-                    gasPump.setModel(
-                            resultSet.getString("model")
-                    );
-
-                    return Optional.of(gasPump);
                 }
             }
 
