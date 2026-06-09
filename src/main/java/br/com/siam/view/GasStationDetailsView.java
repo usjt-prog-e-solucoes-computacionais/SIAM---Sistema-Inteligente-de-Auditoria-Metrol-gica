@@ -29,6 +29,7 @@ public class GasStationDetailsView extends JFrame {
 
     private JButton saveButton;
     private JButton deactivateButton;
+    private JButton reactivateButton;
     private JButton closeButton;
 
     public GasStationDetailsView(
@@ -98,6 +99,10 @@ public class GasStationDetailsView extends JFrame {
 
         deactivateButton =
                 new JButton("Desativar");
+
+
+        reactivateButton =
+                new JButton("Reativar");
 
         closeButton =
                 new JButton("Fechar");
@@ -255,6 +260,17 @@ public class GasStationDetailsView extends JFrame {
 
         panel.add(deactivateButton);
 
+        panel.add(reactivateButton);
+
+        if (gasStation.getActive()) {
+
+            reactivateButton.setVisible(false);
+
+        } else {
+
+            deactivateButton.setVisible(false);
+        }
+
         panel.add(closeButton);
 
         return panel;
@@ -308,9 +324,54 @@ public class GasStationDetailsView extends JFrame {
                 event -> deactivateGasStation()
         );
 
+        reactivateButton.addActionListener(
+                event -> reactivateGasStation()
+        );
+
         closeButton.addActionListener(
                 event -> dispose()
         );
+    }
+
+    private void reactivateGasStation() {
+
+        int option =
+                JOptionPane.showConfirmDialog(
+                        this,
+                        "Deseja realmente reativar este posto?",
+                        "Confirmação",
+                        JOptionPane.YES_NO_OPTION
+                );
+
+        if (option != JOptionPane.YES_OPTION) {
+
+            return;
+        }
+
+        try {
+
+            gasStationController.reactivate(
+                    gasStation.getId()
+            );
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Posto reativado com sucesso.",
+                    "Sucesso",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+
+            dispose();
+
+        } catch (Exception exception) {
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    exception.getMessage(),
+                    "Erro",
+                    JOptionPane.ERROR_MESSAGE
+            );
+        }
     }
 
     private void saveGasStation() {

@@ -25,6 +25,11 @@ public class FiscalizationService {
         fiscalizationDAO.save(fiscalization);
     }
 
+    public List<Fiscalization> getAllFiscalizationsWithInactive() {
+
+        return fiscalizationDAO.findAllWithInactive();
+    }
+
     public List<Fiscalization> getAllFiscalizations() {
 
         return fiscalizationDAO.findAll();
@@ -90,6 +95,15 @@ public class FiscalizationService {
     ) {
 
         fiscalizationDAO.archive(
+                fiscalizationId
+        );
+    }
+
+    public void reactivateFiscalization(
+            Integer fiscalizationId
+    ) {
+
+        fiscalizationDAO.reactivate(
                 fiscalizationId
         );
     }

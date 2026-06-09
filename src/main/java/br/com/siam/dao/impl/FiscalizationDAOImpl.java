@@ -101,6 +101,56 @@ public class FiscalizationDAOImpl implements FiscalizationDAO {
                     ON gp.id = f.gas_pump_id
                 INNER JOIN gas_station gs
                     ON gs.id = gp.gas_station_id
+                WHERE f.active = true
+                ORDER BY f.fiscalization_date DESC
+                """;
+
+        try (
+                Connection connection =
+                        DatabaseConnection.getConnection();
+
+                PreparedStatement preparedStatement =
+                        connection.prepareStatement(sql);
+
+                ResultSet resultSet =
+                        preparedStatement.executeQuery()
+        ) {
+
+            while (resultSet.next()) {
+
+                fiscalizations.add(
+                        mapResult(resultSet)
+                );
+            }
+
+        } catch (SQLException exception) {
+
+            throw new RuntimeException(exception);
+        }
+
+        return fiscalizations;
+    }
+
+    @Override
+    public List<Fiscalization> findAllWithInactive() {
+
+        List<Fiscalization> fiscalizations =
+                new ArrayList<>();
+
+        String sql = """
+                SELECT
+                    f.*,
+                    u.name,
+                    gp.serial_number,
+                    gs.id AS station_id,
+                    gs.corporate_name
+                FROM fiscalization f
+                INNER JOIN user u
+                    ON u.id = f.user_id
+                INNER JOIN gas_pump gp
+                    ON gp.id = f.gas_pump_id
+                INNER JOIN gas_station gs
+                    ON gs.id = gp.gas_station_id
                 ORDER BY f.fiscalization_date DESC
                 """;
 
@@ -150,7 +200,7 @@ public class FiscalizationDAOImpl implements FiscalizationDAO {
                     ON gp.id = f.gas_pump_id
                 INNER JOIN gas_station gs
                     ON gs.id = gp.gas_station_id
-                WHERE f.user_id = ?
+                WHERE f.user_id = ? AND f.active = true
                 ORDER BY f.fiscalization_date DESC
                 """;
 
@@ -299,6 +349,11 @@ public class FiscalizationDAOImpl implements FiscalizationDAO {
                 resultSet.getString("audit_status")
         );
 
+
+        fiscalization.setActive(
+                resultSet.getBoolean("active")
+        );
+
         return fiscalization;
     }
 
@@ -320,7 +375,6 @@ public class FiscalizationDAOImpl implements FiscalizationDAO {
          INNER JOIN gas_station gs
              ON gs.id = gp.gas_station_id
          WHERE f.id = ?
-         AND f.active = true
         """;
 
         try (
@@ -438,5 +492,37 @@ public class FiscalizationDAOImpl implements FiscalizationDAO {
         }
     }
 
+    @Override
+    public void reactivate(
+            Integer fiscalizationId
+    ) {
 
+        String sql = """
+        UPDATE fiscalization
+        SET active = true
+        WHERE id = ?
+        """;
+
+        try (
+                Connection connection =
+                        DatabaseConnection.getConnection();
+
+                PreparedStatement statement =
+                        connection.prepareStatement(sql)
+        ) {
+
+            statement.setInt(
+                    1,
+                    fiscalizationId
+            );
+
+            statement.executeUpdate();
+
+        } catch (SQLException exception) {
+
+            throw new RuntimeException(
+                    exception
+            );
+        }
+    }
 }

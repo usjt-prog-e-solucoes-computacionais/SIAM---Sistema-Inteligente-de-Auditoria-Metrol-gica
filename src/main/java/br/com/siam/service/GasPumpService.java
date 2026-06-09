@@ -94,4 +94,11 @@ public class GasPumpService {
 
         gasPumpDAO.deactivate(id);
     }
+
+    public void reactivate(
+            Integer id
+    ) {
+
+        gasPumpDAO.reactivate(id);
+    }
 }

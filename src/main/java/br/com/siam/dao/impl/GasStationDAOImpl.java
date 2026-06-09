@@ -11,6 +11,36 @@ import java.util.Optional;
 
 public class GasStationDAOImpl implements GasStationDAO {
 
+    private GasStation mapResult(
+            ResultSet resultSet
+    ) throws SQLException {
+
+        GasStation gasStation =
+                new GasStation();
+
+        gasStation.setId(
+                resultSet.getInt("id")
+        );
+
+        gasStation.setCnpj(
+                resultSet.getString("cnpj")
+        );
+
+        gasStation.setCorporateName(
+                resultSet.getString("corporate_name")
+        );
+
+        gasStation.setAddress(
+                resultSet.getString("address")
+        );
+
+        gasStation.setActive(
+                resultSet.getBoolean("active")
+        );
+
+        return gasStation;
+    }
+
     @Override
     public void save(GasStation gasStation) {
 
@@ -79,26 +109,9 @@ public class GasStationDAOImpl implements GasStationDAO {
 
             while (resultSet.next()) {
 
-                GasStation gasStation =
-                        new GasStation();
-
-                gasStation.setId(
-                        resultSet.getInt("id")
+                gasStations.add(
+                        mapResult(resultSet)
                 );
-
-                gasStation.setCnpj(
-                        resultSet.getString("cnpj")
-                );
-
-                gasStation.setCorporateName(
-                        resultSet.getString("corporate_name")
-                );
-
-                gasStation.setAddress(
-                        resultSet.getString("address")
-                );
-
-                gasStations.add(gasStation);
             }
 
         } catch (SQLException exception) {
@@ -135,26 +148,9 @@ public class GasStationDAOImpl implements GasStationDAO {
 
                 if (resultSet.next()) {
 
-                    GasStation gasStation =
-                            new GasStation();
-
-                    gasStation.setId(
-                            resultSet.getInt("id")
+                    return Optional.of(
+                            mapResult(resultSet)
                     );
-
-                    gasStation.setCnpj(
-                            resultSet.getString("cnpj")
-                    );
-
-                    gasStation.setCorporateName(
-                            resultSet.getString("corporate_name")
-                    );
-
-                    gasStation.setAddress(
-                            resultSet.getString("address")
-                    );
-
-                    return Optional.of(gasStation);
                 }
             }
 
@@ -200,26 +196,9 @@ public class GasStationDAOImpl implements GasStationDAO {
 
                 while (resultSet.next()) {
 
-                    GasStation gasStation =
-                            new GasStation();
-
-                    gasStation.setId(
-                            resultSet.getInt("id")
+                    gasStations.add(
+                            mapResult(resultSet)
                     );
-
-                    gasStation.setCnpj(
-                            resultSet.getString("cnpj")
-                    );
-
-                    gasStation.setCorporateName(
-                            resultSet.getString("corporate_name")
-                    );
-
-                    gasStation.setAddress(
-                            resultSet.getString("address")
-                    );
-
-                    gasStations.add(gasStation);
                 }
             }
 
@@ -344,6 +323,74 @@ public class GasStationDAOImpl implements GasStationDAO {
 
             throw new RuntimeException(
                     "Erro ao desativar posto.",
+                    exception
+            );
+        }
+    }
+
+    @Override
+    public void reactivate(
+            Integer gasStationId
+    ) {
+
+        String reactivateStationSql = """
+        UPDATE gas_station
+        SET active = true
+        WHERE id = ?
+        """;
+
+        String reactivatePumpsSql = """
+        UPDATE gas_pump
+        SET active = true
+        WHERE gas_station_id = ?
+        """;
+
+        try (
+                Connection connection =
+                        DatabaseConnection.getConnection()
+        ) {
+
+            connection.setAutoCommit(false);
+
+            try (
+                    PreparedStatement stationStatement =
+                            connection.prepareStatement(
+                                    reactivateStationSql
+                            );
+
+                    PreparedStatement pumpStatement =
+                            connection.prepareStatement(
+                                    reactivatePumpsSql
+                            )
+            ) {
+
+                stationStatement.setInt(
+                        1,
+                        gasStationId
+                );
+
+                stationStatement.executeUpdate();
+
+                pumpStatement.setInt(
+                        1,
+                        gasStationId
+                );
+
+                pumpStatement.executeUpdate();
+
+                connection.commit();
+
+            } catch (SQLException exception) {
+
+                connection.rollback();
+
+                throw exception;
+            }
+
+        } catch (SQLException exception) {
+
+            throw new RuntimeException(
+                    "Erro ao reativar posto.",
                     exception
             );
         }

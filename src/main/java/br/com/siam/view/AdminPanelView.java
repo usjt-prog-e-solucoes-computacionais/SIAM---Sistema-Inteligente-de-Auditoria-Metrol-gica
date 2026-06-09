@@ -23,6 +23,7 @@ public class AdminPanelView extends JFrame {
 
     private JButton createUserButton;
     private JButton deactivateUserButton;
+    private JButton reactivateUserButton;
 
     private JTable userTable;
 
@@ -157,6 +158,10 @@ public class AdminPanelView extends JFrame {
                 deactivateUserButton
         );
 
+        buttonsPanel.add(
+                reactivateUserButton
+        );
+
         gbc.gridx = 0;
         gbc.gridy = 5;
         gbc.gridwidth = 2;
@@ -196,6 +201,9 @@ public class AdminPanelView extends JFrame {
 
         deactivateUserButton =
                 new JButton("Desativar Usuário");
+
+        reactivateUserButton =
+                new JButton("Reativar Usuário");
 
         String[] columns = {
                 "ID",
@@ -282,6 +290,10 @@ public class AdminPanelView extends JFrame {
 
         deactivateUserButton.addActionListener(
                 event -> deactivateUser()
+        );
+
+        reactivateUserButton.addActionListener(
+                event -> reactivateUser()
         );
     }
 
@@ -374,6 +386,33 @@ public class AdminPanelView extends JFrame {
                         );
 
         userController.deactivateUser(userId);
+
+        loadUsers();
+    }
+
+    private void reactivateUser() {
+
+        int selectedRow =
+                userTable.getSelectedRow();
+
+        if (selectedRow == -1) {
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Selecione um usuário."
+            );
+
+            return;
+        }
+
+        Integer userId =
+                (Integer)
+                        userTableModel.getValueAt(
+                                selectedRow,
+                                0
+                        );
+
+        userController.reactivateUser(userId);
 
         loadUsers();
     }

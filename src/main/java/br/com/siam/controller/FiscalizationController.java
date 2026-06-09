@@ -24,6 +24,12 @@ public class FiscalizationController {
         );
     }
 
+    public List<Fiscalization> getAllFiscalizationsWithInactive() {
+
+        return fiscalizationService
+                .getAllFiscalizationsWithInactive();
+    }
+
     public List<Fiscalization> getAllFiscalizations() {
 
         return fiscalizationService
@@ -70,6 +76,16 @@ public class FiscalizationController {
 
         fiscalizationService
                 .archiveFiscalization(
+                        fiscalizationId
+                );
+    }
+
+    public void reactivateFiscalization(
+            Integer fiscalizationId
+    ) {
+
+        fiscalizationService
+                .reactivateFiscalization(
                         fiscalizationId
                 );
     }

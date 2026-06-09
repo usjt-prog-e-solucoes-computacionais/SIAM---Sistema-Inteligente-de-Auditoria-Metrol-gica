@@ -28,6 +28,7 @@ public class FiscalizationDetailsView extends JFrame {
     private JButton saveButton;
 
     private JButton archiveButton;
+    private JButton reactivateButton;
 
     private JLabel fiscalizationTitleLabel;
 
@@ -117,6 +118,10 @@ public class FiscalizationDetailsView extends JFrame {
 
         archiveButton =
                 new JButton("Arquivar");
+
+
+        reactivateButton =
+                new JButton("Reativar");
     }
 
     private void configureWindow() {
@@ -333,7 +338,20 @@ public class FiscalizationDetailsView extends JFrame {
                 );
 
         buttonPanel.add(saveButton);
+
         buttonPanel.add(archiveButton);
+
+        buttonPanel.add(reactivateButton);
+
+        if (fiscalization.getActive()) {
+
+            reactivateButton.setVisible(false);
+
+        } else {
+
+            archiveButton.setVisible(false);
+        }
+
         buttonPanel.add(closeButton);
 
         mainPanel.add(
@@ -417,6 +435,9 @@ public class FiscalizationDetailsView extends JFrame {
 
             archiveButton
                     .setVisible(false);
+
+            reactivateButton.
+                    setVisible(false);
         }
     }
 
@@ -430,9 +451,56 @@ public class FiscalizationDetailsView extends JFrame {
                 event -> archiveFiscalization()
         );
 
+
+        reactivateButton.addActionListener(
+                event -> reactivateFiscalization()
+        );
+
         closeButton.addActionListener(
                 event -> dispose()
         );
+    }
+
+
+    private void reactivateFiscalization() {
+
+        int option =
+                JOptionPane.showConfirmDialog(
+                        this,
+                        "Deseja realmente reativar esta fiscalização?",
+                        "Confirmação",
+                        JOptionPane.YES_NO_OPTION
+                );
+
+        if (option != JOptionPane.YES_OPTION) {
+
+            return;
+        }
+
+        try {
+
+            fiscalizationController.reactivateFiscalization(
+                    fiscalization.getId()
+            );
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Fiscalização reativada com sucesso.",
+                    "Sucesso",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+
+            dispose();
+
+        } catch (Exception exception) {
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    exception.getMessage(),
+                    "Erro",
+                    JOptionPane.ERROR_MESSAGE
+            );
+        }
     }
 
     private void saveFiscalization() {

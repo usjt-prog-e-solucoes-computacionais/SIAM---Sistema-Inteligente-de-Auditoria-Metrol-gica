@@ -66,6 +66,7 @@ public class GasPumpDAOImpl implements GasPumpDAO {
                     gp.id,
                     gp.serial_number,
                     gp.model,
+                    gp.active,
                     gs.id AS station_id,
                     gs.corporate_name
                 FROM gas_pump gp
@@ -105,6 +106,7 @@ public class GasPumpDAOImpl implements GasPumpDAO {
                     gp.id,
                     gp.serial_number,
                     gp.model,
+                    gp.active,
                     gs.id AS station_id,
                     gs.corporate_name
                 FROM gas_pump gp
@@ -220,6 +222,10 @@ public class GasPumpDAOImpl implements GasPumpDAO {
 
         gasPump.setGasStation(gasStation);
 
+        gasPump.setActive(
+                resultSet.getBoolean("active")
+        );
+
         return gasPump;
     }
 
@@ -231,6 +237,7 @@ public class GasPumpDAOImpl implements GasPumpDAO {
                 gp.id,
                 gp.serial_number,
                 gp.model,
+                gp.active,
                 gs.id AS station_id,
                 gs.corporate_name
             FROM gas_pump gp
@@ -323,6 +330,34 @@ public class GasPumpDAOImpl implements GasPumpDAO {
         String sql = """
         UPDATE gas_pump
         SET active = false
+        WHERE id = ?
+        """;
+
+        try (
+                Connection connection =
+                        DatabaseConnection.getConnection();
+
+                PreparedStatement statement =
+                        connection.prepareStatement(sql)
+        ) {
+
+            statement.setInt(1, id);
+
+            statement.executeUpdate();
+
+        } catch (SQLException exception) {
+
+            throw new RuntimeException(exception);
+        }
+    }
+
+    @Override
+    public void reactivate(
+            Integer id
+    ) {
+        String sql = """
+        UPDATE gas_pump
+        SET active = true
         WHERE id = ?
         """;
 
