@@ -2,6 +2,7 @@ package br.com.siam.view;
 
 import br.com.siam.controller.UserController;
 import br.com.siam.model.User;
+import br.com.siam.util.IconUtils;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -233,6 +234,10 @@ public class AdminPanelView extends JFrame {
         setLocationRelativeTo(null);
 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
+        setIconImage(
+                IconUtils.getApplicationIcon()
+        );
     }
 
     private void buildLayout() {

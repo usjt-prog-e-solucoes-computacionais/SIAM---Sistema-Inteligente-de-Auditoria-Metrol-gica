@@ -4,6 +4,7 @@ import br.com.siam.controller.MainController;
 import br.com.siam.model.Fiscalization;
 import br.com.siam.model.User;
 import br.com.siam.service.FiscalizationService;
+import br.com.siam.util.IconUtils;
 import br.com.siam.view.FiscalizationFormView;
 import br.com.siam.view.GasPumpFormView;
 import br.com.siam.view.GasStationFormView;
@@ -208,6 +209,10 @@ public class MainView extends JFrame {
     private void configureWindow() {
 
         setTitle("SIAM - Dashboard Principal");
+
+        setIconImage(
+                IconUtils.getApplicationIcon()
+        );
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
