@@ -21,4 +21,6 @@ public interface UserDAO {
     void save(User user);
 
     void deactivate(Integer userId);
+
+    void reactivate(Integer userId);
 }

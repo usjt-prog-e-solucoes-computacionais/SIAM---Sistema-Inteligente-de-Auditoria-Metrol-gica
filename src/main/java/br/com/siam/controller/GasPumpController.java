@@ -74,4 +74,11 @@ public class GasPumpController {
 
         gasPumpService.deactivate(id);
     }
+
+    public void reactivate(
+            Integer id
+    ) {
+
+        gasPumpService.reactivate(id);
+    }
 }

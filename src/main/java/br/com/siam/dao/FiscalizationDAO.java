@@ -11,6 +11,8 @@ public interface FiscalizationDAO {
 
     List<Fiscalization> findAll();
 
+    List<Fiscalization> findAllWithInactive();
+
     List<Fiscalization> findByUser(Integer userId);
 
     List<Fiscalization> search(String term);

@@ -144,6 +144,22 @@ public class UserDAOImpl implements UserDAO {
         }
     }
 
+    @Override
+    public void reactivate(Integer id) {
+        String sql = "UPDATE user SET active = true WHERE id = ?";
+
+        try (
+                Connection connection = DatabaseConnection.getConnection();
+                PreparedStatement statement = connection.prepareStatement(sql)
+        ) {
+            statement.setInt(1, id);
+            statement.executeUpdate();
+
+        } catch (SQLException exception) {
+            throw new RuntimeException("Erro reativating user.", exception);
+        }
+    }
+
     private User mapResultSetToUser(ResultSet resultSet) throws SQLException {
         User user = new User();
         user.setId(resultSet.getInt("id"));

@@ -29,6 +29,7 @@ public class GasPumpDetailsView extends JFrame {
 
     private JButton saveButton;
     private JButton deactivateButton;
+    private JButton reactivateButton;
     private JButton closeButton;
 
     public GasPumpDetailsView(
@@ -100,6 +101,9 @@ public class GasPumpDetailsView extends JFrame {
 
         deactivateButton =
                 new JButton("Desativar");
+
+        reactivateButton =
+                new JButton("Reativar");
 
         closeButton =
                 new JButton("Fechar");
@@ -257,6 +261,17 @@ public class GasPumpDetailsView extends JFrame {
 
         panel.add(deactivateButton);
 
+        panel.add(reactivateButton);
+
+        if (gasPump.getActive()) {
+
+            reactivateButton.setVisible(false);
+
+        } else {
+
+            deactivateButton.setVisible(false);
+        }
+
         panel.add(closeButton);
 
         return panel;
@@ -299,6 +314,8 @@ public class GasPumpDetailsView extends JFrame {
             saveButton.setVisible(false);
 
             deactivateButton.setVisible(false);
+
+            reactivateButton.setVisible(false);
         }
     }
 
@@ -312,9 +329,54 @@ public class GasPumpDetailsView extends JFrame {
                 event -> deactivateGasPump()
         );
 
+        reactivateButton.addActionListener(
+                event -> reactivateGasPump()
+        );
+
         closeButton.addActionListener(
                 event -> dispose()
         );
+    }
+
+    private void reactivateGasPump() {
+
+        int option =
+                JOptionPane.showConfirmDialog(
+                        this,
+                        "Deseja realmente reativar esta bomba?",
+                        "Confirmação",
+                        JOptionPane.YES_NO_OPTION
+                );
+
+        if (option != JOptionPane.YES_OPTION) {
+
+            return;
+        }
+
+        try {
+
+            gasPumpController.reactivate(
+                    gasPump.getId()
+            );
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Bomba reativada com sucesso.",
+                    "Sucesso",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+
+            dispose();
+
+        } catch (Exception exception) {
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    exception.getMessage(),
+                    "Erro",
+                    JOptionPane.ERROR_MESSAGE
+            );
+        }
     }
 
     private void saveGasPump() {

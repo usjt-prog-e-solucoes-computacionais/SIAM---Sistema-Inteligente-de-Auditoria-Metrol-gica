@@ -10,6 +10,8 @@ public class GasPump {
 
     private String model;
 
+    private Boolean active;
+
     public GasPump() {
     }
 
@@ -44,6 +46,10 @@ public class GasPump {
     public void setModel(String model) {
         this.model = model;
     }
+
+    public Boolean getActive() { return active; }
+
+    public void setActive(Boolean active) { this.active = active; }
 
     @Override
     public String toString() {
