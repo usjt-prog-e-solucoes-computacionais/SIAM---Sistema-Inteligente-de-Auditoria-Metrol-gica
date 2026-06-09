@@ -155,9 +155,12 @@ public class MainView extends JFrame {
          */
         String[] columns = {
                 "ID",
-                "Tipo Irregularidade",
+                "Fiscal",
+                "Posto",
+                "Bomba",
+                "Irregularidade",
                 "Status",
-                "Erro Medição",
+                "Erro",
                 "Data"
         };
 
@@ -174,6 +177,38 @@ public class MainView extends JFrame {
                 new JTable(fiscalizationTableModel);
 
         fiscalizationTable.setRowHeight(28);
+
+        fiscalizationTable.getColumnModel()
+                .getColumn(0)
+                .setPreferredWidth(60);
+
+        fiscalizationTable.getColumnModel()
+                .getColumn(1)
+                .setPreferredWidth(180);
+
+        fiscalizationTable.getColumnModel()
+                .getColumn(2)
+                .setPreferredWidth(250);
+
+        fiscalizationTable.getColumnModel()
+                .getColumn(3)
+                .setPreferredWidth(150);
+
+        fiscalizationTable.getColumnModel()
+                .getColumn(4)
+                .setPreferredWidth(200);
+
+        fiscalizationTable.getColumnModel()
+                .getColumn(5)
+                .setPreferredWidth(120);
+
+        fiscalizationTable.getColumnModel()
+                .getColumn(6)
+                .setPreferredWidth(100);
+
+        fiscalizationTable.getColumnModel()
+                .getColumn(7)
+                .setPreferredWidth(160);
 
         fiscalizationScrollPane =
                 new JScrollPane(fiscalizationTable);
@@ -439,7 +474,8 @@ public class MainView extends JFrame {
                             fiscalization.getId(),
                             fiscalization.getUser().getName(),
                             fiscalization.getGasPump()
-                                    .getGasStation(),
+                                    .getGasStation()
+                                    .getCorporateName(),
                             fiscalization.getGasPump()
                                     .getSerialNumber(),
                             fiscalization.getIrregularityType(),
@@ -627,14 +663,22 @@ public class MainView extends JFrame {
 
         for (Fiscalization fiscalization : fiscalizations) {
 
-            fiscalizationTableModel.addRow(new Object[]{
-                    fiscalization.getId(),
-                    fiscalization.getIrregularityType(),
-                    fiscalization.getAuditStatus(),
-                    fiscalization.getMeasurementError(),
-                    fiscalization.getFiscalizationDate()
-                            .format(formatter)
-            });
+            fiscalizationTableModel.addRow(
+                    new Object[]{
+                            fiscalization.getId(),
+                            fiscalization.getUser().getName(),
+                            fiscalization.getGasPump()
+                                    .getGasStation()
+                                    .getCorporateName(),
+                            fiscalization.getGasPump()
+                                    .getSerialNumber(),
+                            fiscalization.getIrregularityType(),
+                            fiscalization.getAuditStatus(),
+                            fiscalization.getMeasurementError(),
+                            fiscalization.getFiscalizationDate()
+                                    .format(formatter)
+                    }
+            );
         }
     }
 }
