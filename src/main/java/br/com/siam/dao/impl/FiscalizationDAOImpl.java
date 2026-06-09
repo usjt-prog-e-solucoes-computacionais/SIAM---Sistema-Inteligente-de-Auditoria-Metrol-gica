@@ -4,6 +4,7 @@ import br.com.siam.config.DatabaseConnection;
 import br.com.siam.dao.FiscalizationDAO;
 import br.com.siam.model.Fiscalization;
 import br.com.siam.model.GasPump;
+import br.com.siam.model.GasStation;
 import br.com.siam.model.User;
 
 import java.sql.*;
@@ -90,12 +91,16 @@ public class FiscalizationDAOImpl implements FiscalizationDAO {
                 SELECT
                     f.*,
                     u.name,
-                    gp.serial_number
+                    gp.serial_number,
+                    gs.id AS station_id,
+                    gs.corporate_name
                 FROM fiscalization f
                 INNER JOIN user u
                     ON u.id = f.user_id
                 INNER JOIN gas_pump gp
                     ON gp.id = f.gas_pump_id
+                INNER JOIN gas_station gs
+                    ON gs.id = gp.gas_station_id
                 ORDER BY f.fiscalization_date DESC
                 """;
 
@@ -135,12 +140,16 @@ public class FiscalizationDAOImpl implements FiscalizationDAO {
                 SELECT
                     f.*,
                     u.name,
-                    gp.serial_number
+                    gp.serial_number,
+                    gs.id AS station_id,
+                    gs.corporate_name
                 FROM fiscalization f
                 INNER JOIN user u
                     ON u.id = f.user_id
                 INNER JOIN gas_pump gp
                     ON gp.id = f.gas_pump_id
+                INNER JOIN gas_station gs
+                    ON gs.id = gp.gas_station_id
                 WHERE f.user_id = ?
                 ORDER BY f.fiscalization_date DESC
                 """;
@@ -186,12 +195,16 @@ public class FiscalizationDAOImpl implements FiscalizationDAO {
                 SELECT
                     f.*,
                     u.name,
-                    gp.serial_number
+                    gp.serial_number,
+                    gs.id AS station_id,
+                    gs.corporate_name
                 FROM fiscalization f
                 INNER JOIN user u
                     ON u.id = f.user_id
                 INNER JOIN gas_pump gp
                     ON gp.id = f.gas_pump_id
+                INNER JOIN gas_station gs
+                    ON gs.id = gp.gas_station_id
                 WHERE
                     gp.serial_number LIKE ?
                     OR f.irregularity_type LIKE ?
@@ -238,10 +251,28 @@ public class FiscalizationDAOImpl implements FiscalizationDAO {
         user.setId(resultSet.getInt("user_id"));
         user.setName(resultSet.getString("name"));
 
+        GasStation gasStation = new GasStation();
+
+        gasStation.setId(
+                resultSet.getInt("station_id")
+        );
+
+        gasStation.setCorporateName(
+                resultSet.getString("corporate_name")
+        );
+
         GasPump gasPump = new GasPump();
-        gasPump.setId(resultSet.getInt("gas_pump_id"));
+
+        gasPump.setId(
+                resultSet.getInt("gas_pump_id")
+        );
+
         gasPump.setSerialNumber(
                 resultSet.getString("serial_number")
+        );
+
+        gasPump.setGasStation(
+                gasStation
         );
 
         Fiscalization fiscalization =
@@ -277,13 +308,17 @@ public class FiscalizationDAOImpl implements FiscalizationDAO {
         String sql = """
          SELECT
              f.*,
-            u.name,
-            gp.serial_number
+             u.name,
+             gp.serial_number,
+             gs.id AS station_id,
+             gs.corporate_name
          FROM fiscalization f
          INNER JOIN user u
             ON u.id = f.user_id
          INNER JOIN gas_pump gp
              ON gp.id = f.gas_pump_id
+         INNER JOIN gas_station gs
+             ON gs.id = gp.gas_station_id
          WHERE f.id = ?
          AND f.active = true
         """;
