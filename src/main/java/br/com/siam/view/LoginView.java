@@ -11,6 +11,7 @@ import java.util.Optional;
 
 public class LoginView extends JFrame {
 
+    private JLabel logoLabel;
     private JLabel systemTitleLabel;
     private JLabel identifierLabel;
     private JLabel passwordLabel;
@@ -35,23 +36,23 @@ public class LoginView extends JFrame {
     }
 
     private void initializeComponents() {
-        systemTitleLabel =
-                new JLabel(
-                        "SIAM - Sistema Inteligente de Auditoria",
-                        IconUtils.getScaledLogo(
+        logoLabel = new JLabel(
+                IconUtils.getScaledLogo(
+                        96,
+                        96
+                )
+        );
 
-                                32,
+        logoLabel.setHorizontalAlignment(
+                SwingConstants.CENTER
+        );
 
-                                32
-
-                        ),
-                        SwingConstants.LEFT
-                );
+        systemTitleLabel = new JLabel("SIAM - Sistema Inteligente de Auditoria", SwingConstants.CENTER);
         systemTitleLabel.setFont(new Font("Arial", Font.BOLD, 18));
 
         identifierLabel = new JLabel("E-mail ou Matrícula:");
         passwordLabel = new JLabel("Senha:");
-        footerLabel = new JLabel("(c) 2026 SIAM - Sistema Inteligente de Auditoria Metrológica. Projeto Acadêmico - Universidade São Judas Tadeu.", SwingConstants.CENTER);
+        footerLabel = new JLabel("(c) 2026 Danilo. Todos os direitos reservados.", SwingConstants.CENTER);
 
         identifierField = new JTextField(25);
         passwordField = new JPasswordField(25);
@@ -101,8 +102,10 @@ public class LoginView extends JFrame {
         JPanel headerPanel = new JPanel();
         headerPanel.setLayout(new BoxLayout(headerPanel, BoxLayout.Y_AXIS));
 
+        logoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         systemTitleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        headerPanel.add(logoLabel);
         headerPanel.add(Box.createVerticalStrut(10));
         headerPanel.add(systemTitleLabel);
 

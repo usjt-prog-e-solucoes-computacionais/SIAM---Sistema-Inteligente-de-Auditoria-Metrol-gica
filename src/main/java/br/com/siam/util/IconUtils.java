@@ -30,7 +30,7 @@ public final class IconUtils {
 
         URL iconUrl =
                 IconUtils.class.getResource(
-                        "/images/siam-icon.png"
+                        "/images/siam-logo.png"
                 );
 
         if (iconUrl == null) {
