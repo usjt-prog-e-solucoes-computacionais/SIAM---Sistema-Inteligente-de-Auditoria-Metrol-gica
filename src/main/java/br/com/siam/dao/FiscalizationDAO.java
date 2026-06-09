@@ -20,4 +20,6 @@ public interface FiscalizationDAO {
     boolean update(Fiscalization fiscalization);
 
     void archive(Integer fiscalizationId);
+
+    void reactivate(Integer fiscalizationId);
 }
