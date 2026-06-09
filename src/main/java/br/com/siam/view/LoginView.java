@@ -52,7 +52,7 @@ public class LoginView extends JFrame {
 
         identifierLabel = new JLabel("E-mail ou Matrícula:");
         passwordLabel = new JLabel("Senha:");
-        footerLabel = new JLabel("(c) 2026 Danilo. Todos os direitos reservados.", SwingConstants.CENTER);
+        footerLabel = new JLabel("(c) 2026 SIAM - Sistema Inteligente de Auditoria Metrológica. Projeto Acadêmico - Universidade São Judas Tadeu.", SwingConstants.CENTER);
 
         identifierField = new JTextField(25);
         passwordField = new JPasswordField(25);
