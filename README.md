@@ -109,27 +109,6 @@ flowchart TD
 
     B --> A
 ```
-<<<<<<< HEAD
-
-### 🔧 Tecnologias Utilizadas
-
-| Camada            | Tecnologia        |
-|-------------------|-------------------|
-| Linguagem         | Java 21           |
-| Interface Gráfica | javax.swing       |
-| Banco de Dados    | MySQL             |
-| Persistência      | JDBC              |
-| Arquitetura       | MVC               |
-| Padrões           | DAO + Service     |
-| Build Tools       | Maven             |
-| IA (Planejado)    | Google Gemini API |
-| IA (Planejado)    | RAG               |
-
----
-
-## 📊 Funcionalidades Implementadas
-
-=======
 
 ---
 
@@ -151,7 +130,6 @@ flowchart TD
 
 ## 📊 Funcionalidades Implementadas
 
->>>>>>> a95b0e708fca8585402309421e8c25c930f96773
 ### ✅ Infraestrutura
 - [X] Projeto Maven
 - [X] Estrutura MVC
