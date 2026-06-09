@@ -109,6 +109,7 @@ flowchart TD
 
     B --> A
 ```
+<<<<<<< HEAD
 
 ### 🔧 Tecnologias Utilizadas
 
@@ -128,6 +129,29 @@ flowchart TD
 
 ## 📊 Funcionalidades Implementadas
 
+=======
+
+---
+
+### 🔧 Tecnologias Utilizadas
+
+| Camada            | Tecnologia        |
+|-------------------|-------------------|
+| Linguagem         | Java 21           |
+| Interface Gráfica | javax.swing       |
+| Banco de Dados    | MySQL             |
+| Persistência      | JDBC              |
+| Arquitetura       | MVC               |
+| Padrões           | DAO + Service     |
+| Build Tools       | Maven             |
+| IA (Planejado)    | Google Gemini API |
+| IA (Planejado)    | RAG               |
+
+---
+
+## 📊 Funcionalidades Implementadas
+
+>>>>>>> a95b0e708fca8585402309421e8c25c930f96773
 ### ✅ Infraestrutura
 - [X] Projeto Maven
 - [X] Estrutura MVC
@@ -449,7 +473,7 @@ Universidade São Judas Tadeu — 2026/1
 
 ---
 
-## 🚧 Status do Projeto
+## 🚀 Roadmap
 
 **Versão 1.0 — MVP**
 - Autenticação 

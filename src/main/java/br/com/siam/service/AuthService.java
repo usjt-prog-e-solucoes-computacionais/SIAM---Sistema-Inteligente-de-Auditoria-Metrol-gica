@@ -1,6 +1,7 @@
 package br.com.siam.service;
 
 import br.com.siam.dao.UserDAO;
+import br.com.siam.dao.impl.UserDAOImpl;
 import br.com.siam.model.User;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -10,14 +11,14 @@ public class AuthService {
 
     private final UserDAO userDAO;
 
-    public AuthService(UserDAO userDAO) {
-        this.userDAO = userDAO;
+    public AuthService() {
+        this.userDAO = new UserDAOImpl();
     }
 
-    public Optional<User> authenticate(String login, String password) {
-        validateLoginInput(login, password);
+    public Optional<User> authenticate(String identifier, String password) {
+        validateLoginInput(identifier, password);
 
-        Optional<User> userOptional = userDAO.findByLogin(login);
+        Optional<User> userOptional = userDAO.findByEmailOrRegistration(identifier);
 
         if (userOptional.isEmpty()) {
             return Optional.empty();
