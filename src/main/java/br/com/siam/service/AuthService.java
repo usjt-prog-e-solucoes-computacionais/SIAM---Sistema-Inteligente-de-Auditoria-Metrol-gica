@@ -26,6 +26,10 @@ public class AuthService {
 
         User user = userOptional.get();
 
+        if (!user.getActive()) {
+            return Optional.empty();
+        }
+
         boolean passwordMatches = BCrypt.checkpw(password, user.getPasswordHash());
 
         if (!passwordMatches) {
@@ -37,11 +41,11 @@ public class AuthService {
 
     private void validateLoginInput(String login, String password) {
         if (login == null || login.isBlank()) {
-            throw new IllegalArgumentException("Login cannot be empty.");
+            throw new IllegalArgumentException("Login não pode estar vazio.");
         }
 
         if (password == null || password.isBlank()) {
-            throw new IllegalArgumentException("Password cannot be empty.");
+            throw new IllegalArgumentException("Senha não pode estar vazia.");
         }
     }
 }

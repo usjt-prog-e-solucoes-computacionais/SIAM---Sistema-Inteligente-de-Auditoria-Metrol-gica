@@ -29,6 +29,13 @@ public class FiscalizationDetailsView extends JFrame {
 
     private JButton archiveButton;
 
+    private JLabel fiscalizationTitleLabel;
+
+    private JLabel inspectorLabel;
+    private JLabel fiscalizationDateLabel;
+
+    private JButton closeButton;
+
     public FiscalizationDetailsView(
             Integer fiscalizationId,
             User authenticatedUser
@@ -60,6 +67,29 @@ public class FiscalizationDetailsView extends JFrame {
     }
 
     private void initializeComponents() {
+
+        fiscalizationTitleLabel =
+                new JLabel(
+                        "",
+                        SwingConstants.CENTER
+                );
+
+        fiscalizationTitleLabel.setFont(
+                new Font(
+                        "Segoe UI",
+                        Font.BOLD,
+                        22
+                )
+        );
+
+        inspectorLabel =
+                new JLabel();
+
+        fiscalizationDateLabel =
+                new JLabel();
+
+        closeButton =
+                new JButton("Fechar");
 
         irregularityTypeField =
                 new JTextField(30);
@@ -113,83 +143,233 @@ public class FiscalizationDetailsView extends JFrame {
 
     private void buildLayout() {
 
-        JPanel panel =
+        JPanel mainPanel =
                 new JPanel(
-                        new BorderLayout()
-                );
-
-        JPanel formPanel =
-                new JPanel(
-                        new GridLayout(
-                                4,
-                                2,
+                        new BorderLayout(
                                 10,
                                 10
                         )
                 );
 
-        formPanel.add(
-                new JLabel(
-                        "Irregularidade:"
+        mainPanel.setBorder(
+                BorderFactory.createEmptyBorder(
+                        15,
+                        15,
+                        15,
+                        15
                 )
         );
 
-        formPanel.add(
-                irregularityTypeField
+        /*
+         * HEADER
+         */
+        JPanel headerPanel =
+                new JPanel(
+                        new BorderLayout()
+                );
+
+        headerPanel.add(
+                fiscalizationTitleLabel,
+                BorderLayout.CENTER
         );
 
-        formPanel.add(
-                new JLabel(
-                        "Erro de Medição:"
+        /*
+         * DETAILS
+         */
+        JPanel detailsPanel =
+                new JPanel(
+                        new GridBagLayout()
+                );
+
+        GridBagConstraints gbc =
+                new GridBagConstraints();
+
+        gbc.insets =
+                new Insets(
+                        5,
+                        5,
+                        5,
+                        5
+                );
+
+        gbc.anchor =
+                GridBagConstraints.WEST;
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        detailsPanel.add(
+                new JLabel("Fiscal:"),
+                gbc
+        );
+
+        gbc.gridx = 1;
+        detailsPanel.add(
+                inspectorLabel,
+                gbc
+        );
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        detailsPanel.add(
+                new JLabel("Data:"),
+                gbc
+        );
+
+        gbc.gridx = 1;
+        detailsPanel.add(
+                fiscalizationDateLabel,
+                gbc
+        );
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        detailsPanel.add(
+                new JLabel("Status:"),
+                gbc
+        );
+
+        gbc.gridx = 1;
+        detailsPanel.add(
+                auditStatusComboBox,
+                gbc
+        );
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        detailsPanel.add(
+                new JLabel("Tipo de Irregularidade:"),
+                gbc
+        );
+
+        gbc.gridx = 1;
+        detailsPanel.add(
+                irregularityTypeField,
+                gbc
+        );
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        detailsPanel.add(
+                new JLabel("Erro de Medição:"),
+                gbc
+        );
+
+        gbc.gridx = 1;
+        detailsPanel.add(
+                measurementErrorField,
+                gbc
+        );
+
+        /*
+         * NEXT STEPS
+         */
+        JPanel nextStepsPanel =
+                new JPanel(
+                        new BorderLayout()
+                );
+
+        nextStepsPanel.setBorder(
+                BorderFactory.createTitledBorder(
+                        "Próximos Passos"
                 )
         );
 
-        formPanel.add(
-                measurementErrorField
-        );
-
-        formPanel.add(
-                new JLabel(
-                        "Status:"
-                )
-        );
-
-        formPanel.add(
-                auditStatusComboBox
-        );
-
-        panel.add(
-                formPanel,
-                BorderLayout.NORTH
-        );
-
-        panel.add(
+        nextStepsPanel.add(
                 new JScrollPane(
                         nextStepsTextArea
                 ),
                 BorderLayout.CENTER
         );
 
-        JPanel buttonPanel =
+        /*
+         * AI PANEL
+         */
+        JPanel aiPanel =
+                new JPanel(
+                        new BorderLayout()
+                );
+
+        aiPanel.setBorder(
+                BorderFactory.createTitledBorder(
+                        "Sugestões da IA"
+                )
+        );
+
+        aiPanel.add(
+                new JLabel(
+                        "Em breve...",
+                        SwingConstants.CENTER
+                ),
+                BorderLayout.CENTER
+        );
+
+        /*
+         * CENTER
+         */
+        JPanel centerPanel =
                 new JPanel();
 
-        buttonPanel.add(
-                saveButton
+        centerPanel.setLayout(
+                new BoxLayout(
+                        centerPanel,
+                        BoxLayout.Y_AXIS
+                )
         );
 
-        buttonPanel.add(
-                archiveButton
+        centerPanel.add(detailsPanel);
+        centerPanel.add(Box.createVerticalStrut(15));
+        centerPanel.add(nextStepsPanel);
+        centerPanel.add(Box.createVerticalStrut(15));
+        centerPanel.add(aiPanel);
+
+        /*
+         * BUTTONS
+         */
+        JPanel buttonPanel =
+                new JPanel(
+                        new FlowLayout(
+                                FlowLayout.CENTER
+                        )
+                );
+
+        buttonPanel.add(saveButton);
+        buttonPanel.add(archiveButton);
+        buttonPanel.add(closeButton);
+
+        mainPanel.add(
+                headerPanel,
+                BorderLayout.NORTH
         );
 
-        panel.add(
+        mainPanel.add(
+                centerPanel,
+                BorderLayout.CENTER
+        );
+
+        mainPanel.add(
                 buttonPanel,
                 BorderLayout.SOUTH
         );
 
-        setContentPane(panel);
+        setContentPane(mainPanel);
     }
 
     private void loadData() {
+
+        fiscalizationTitleLabel.setText(
+                "Fiscalização #"
+                        + fiscalization.getId()
+        );
+
+        inspectorLabel.setText(
+                fiscalization.getUser().getName()
+        );
+
+        fiscalizationDateLabel.setText(
+                fiscalization
+                        .getFiscalizationDate()
+                        .toString()
+        );
 
         irregularityTypeField.setText(
                 fiscalization.getIrregularityType()
@@ -248,6 +428,10 @@ public class FiscalizationDetailsView extends JFrame {
 
         archiveButton.addActionListener(
                 event -> archiveFiscalization()
+        );
+
+        closeButton.addActionListener(
+                event -> dispose()
         );
     }
 
